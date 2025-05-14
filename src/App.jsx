@@ -60,6 +60,63 @@ function RecurringBadge() {
 }
 
 export default function App() {
+  const [loggedIn, setLoggedIn] = useState(() => {
+    return localStorage.getItem("logged-in") === "true";
+  });
+  const [loginUser, setLoginUser] = useState("");
+  const [loginPass, setLoginPass] = useState("");
+  const [loginError, setLoginError] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (loginUser === "fajar" && loginPass === "fajar") {
+      setLoggedIn(true);
+      localStorage.setItem("logged-in", "true");
+      setLoginError("");
+    } else {
+      setLoginError("Invalid username or password");
+    }
+  };
+  const handleLogout = () => {
+    setLoggedIn(false);
+    localStorage.removeItem("logged-in");
+  };
+
+  if (!loggedIn) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <form
+          className="bg-agendaCardDark p-8 rounded-2xl shadow-lg flex flex-col gap-4 w-80"
+          onSubmit={handleLogin}
+        >
+          <h2 className="text-2xl font-bold text-center text-white mb-2">Login</h2>
+          <input
+            className="rounded px-3 py-2 bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-agendaAccent"
+            type="text"
+            placeholder="Username"
+            value={loginUser}
+            onChange={e => setLoginUser(e.target.value)}
+            autoFocus
+          />
+          <input
+            className="rounded px-3 py-2 bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-agendaAccent"
+            type="password"
+            placeholder="Password"
+            value={loginPass}
+            onChange={e => setLoginPass(e.target.value)}
+          />
+          {loginError && <div className="text-red-400 text-sm text-center">{loginError}</div>}
+          <button
+            className="rounded px-4 py-2 bg-agendaAccent hover:bg-agendaPurple text-white font-semibold transition-colors mt-2"
+            type="submit"
+          >
+            Log In
+          </button>
+        </form>
+      </div>
+    );
+  }
+
   const [tasks, setTasks] = useState(getInitialTasks());
   const [inputs, setInputs] = useState({});
   const [comments, setComments] = useState(getInitialComments());
@@ -380,7 +437,7 @@ export default function App() {
           </section>
         ))}
       </div>
-      <footer className="mt-12 text-gray-400 text-sm">fajar</footer>
+      <footer className="mt-12 text-gray-400 text-sm">fajar <button className="ml-4 text-agendaAccent underline" onClick={handleLogout}>Logout</button></footer>
     </div>
   );
 } 
