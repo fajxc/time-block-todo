@@ -1,7 +1,7 @@
 // Main app for the time-blocked to-do list, inspired by agenda.dev
 // 4 sections: 10am-2pm, 2-6pm, 6-10pm, 10pm-sleep
 // Modern dark UI, React + Tailwind CSS, agenda.dev color palette, interactive cards, and per-task comments
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const TIME_BLOCKS = [
   { label: "10am - 2pm", key: "morning" },
@@ -41,7 +41,36 @@ function getInitialLabels() {
 
 function getTodayKey() {
   const d = new Date();
-  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+  // Convert to Mountain Time
+  const mountainTime = new Date(d.toLocaleString("en-US", { timeZone: "America/Denver" }));
+  return `${mountainTime.getFullYear()}-${mountainTime.getMonth() + 1}-${mountainTime.getDate()}`;
+}
+
+function MountainTimeClock() {
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const mountainTime = new Date(now.toLocaleString("en-US", { timeZone: "America/Denver" }));
+      setTime(mountainTime.toLocaleTimeString("en-US", { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true,
+        timeZone: "America/Denver"
+      }));
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="text-agendaGold text-sm font-mono">
+      MT: {time}
+    </div>
+  );
 }
 
 function RecurringBadge() {
@@ -301,7 +330,10 @@ export default function App() {
           </svg>
         )}
       </button>
-      <h1 className="text-3xl font-bold mb-8 tracking-tight text-white">get shit done</h1>
+      <div className="flex items-center gap-4 mb-8">
+        <h1 className="text-3xl font-bold tracking-tight text-white">get shit done</h1>
+        <MountainTimeClock />
+      </div>
       <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8">
         {TIME_BLOCKS.map(({ label, key }) => (
           <section
