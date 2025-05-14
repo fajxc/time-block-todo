@@ -68,7 +68,7 @@ function MountainTimeClock() {
 
   return (
     <div className="text-agendaGold text-sm font-mono">
-      MT: {time}
+      {time}
     </div>
   );
 }
