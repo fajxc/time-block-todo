@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/time-block-todo/static/css/main.cc2ead58.css",
+    "main.js": "/time-block-todo/static/js/main.645ca4c5.js",
+    "index.html": "/time-block-todo/index.html",
+    "main.cc2ead58.css.map": "/time-block-todo/static/css/main.cc2ead58.css.map",
+    "main.645ca4c5.js.map": "/time-block-todo/static/js/main.645ca4c5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cc2ead58.css",
+    "static/js/main.645ca4c5.js"
+  ]
+}
