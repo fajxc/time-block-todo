@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/time-block-todo/static/css/main.9d5d16d0.css",
-    "main.js": "/time-block-todo/static/js/main.8d4cb44d.js",
+    "main.css": "/time-block-todo/static/css/main.951a2aed.css",
+    "main.js": "/time-block-todo/static/js/main.60547f72.js",
     "index.html": "/time-block-todo/index.html",
-    "main.9d5d16d0.css.map": "/time-block-todo/static/css/main.9d5d16d0.css.map",
-    "main.8d4cb44d.js.map": "/time-block-todo/static/js/main.8d4cb44d.js.map"
+    "main.951a2aed.css.map": "/time-block-todo/static/css/main.951a2aed.css.map",
+    "main.60547f72.js.map": "/time-block-todo/static/js/main.60547f72.js.map"
   },
   "entrypoints": [
-    "static/css/main.9d5d16d0.css",
-    "static/js/main.8d4cb44d.js"
+    "static/css/main.951a2aed.css",
+    "static/js/main.60547f72.js"
   ]
 }
